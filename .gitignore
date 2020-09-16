@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+/.vs/HyacinthFolder/v16
+/x64/Debug
+/base
+/HyacinthFolder/x64/Debug
