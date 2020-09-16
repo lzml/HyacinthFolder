@@ -25,6 +25,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
 
+    base::MessageLoop loop(base::MessageLoop::TYPE_UI);
     std::wstring class_name(CLASSNAME);
 
     WNDCLASS wc = { 0 };
@@ -33,11 +34,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     wc.lpszClassName = class_name.c_str();
     RegisterClass(&wc);
 
-    HWND window = CreateWindow(class_name.c_str(),0 ,0, 0, 0, 200, 2000, 0, 0,
-        hInstance, 0);
+    HWND window = CreateWindow(class_name.c_str(), L"123" , WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, 0,
+        400, 600, 0, 0,  hInstance, 0);
 
-    
- 
+    ShowWindow(window, SW_SHOWNORMAL);
+
+    loop.Run();
+
     return 0;
 }
 
