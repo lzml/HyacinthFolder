@@ -10,6 +10,11 @@ bool WebWindow::createWebWindow(std::wstring title, IWebCallback* webCallback,st
 	{
 		return false;
 	}
+
+	//HWND hwnd = wkeGetWindowHandle(view);
+	//LONG style = GetWindowLong(hwnd, GWL_STYLE);
+	//SetWindowLong(hwnd, GWL_STYLE, style & ~WS_CAPTION  );
+
 	WebWindow* webWnd = new WebWindow;
 	webWnd->webWindow_ = view;
 	webWnd->webCallback_ = webCallback;
@@ -25,6 +30,8 @@ bool WebWindow::createWebWindow(std::wstring title, IWebCallback* webCallback,st
 	wkeOnCreateView(view, WebWindow::handCreateView, webWnd);
 	wkeOnLoadUrlBegin(view, WebWindow::handLoadUrlBegin, webWnd);
 	wkeOnLoadUrlEnd(view, WebWindow::handLoadUrlEnd, webWnd);
+
+	wkeJsBindFunction("eMsg", &WebWindow::handJsMsgloop, webWnd, 5);
 
 	if (webCallback)
 	{
@@ -118,4 +125,12 @@ void  WebWindow::handDidCreateScriptContex(wkeWebView webView, void* param, wkeW
 	WebWindow* pWebWindow = (WebWindow*)param;
 	if (!pWebWindow)	return ;
 	return pWebWindow->webCallback_->handlerDidCreateScriptContex(pWebWindow, frameId, context, extensionGroup, worldId);
+}
+
+
+ jsValue WebWindow::handJsMsgloop(jsExecState es, void* param)
+{
+	 WebWindow* pWebWindow = (WebWindow*)param;
+	 if (!pWebWindow)	return jsUndefined();
+	 return pWebWindow->webCallback_->handlerJsMsgloop(pWebWindow, es);
 }

@@ -39,6 +39,8 @@ private:
 		wkeWebFrameHandle frameId, void* context, int extensionGroup, int worldId) ;
 
 
+	static jsValue WKE_CALL_TYPE handJsMsgloop(jsExecState es, void* param);
+
 private:
 	IWebCallback* webCallback_;
 	wkeWebView webWindow_;

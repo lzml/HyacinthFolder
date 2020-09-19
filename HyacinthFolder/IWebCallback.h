@@ -29,7 +29,8 @@ public:
 	virtual bool handlerLoadUrlBegin(WebWindow* webView, const char* url, void* job) { return false; }
 	virtual void handlerLoadUrlEnd(WebWindow* webView, const char* url, void* job, void* buf, int len) {}
 
-	virtual void WKE_CALL_TYPE handlerDidCreateScriptContex(WebWindow* webView, wkeWebFrameHandle frameId, void* context, int extensionGroup, int worldId) {}
+	virtual void  handlerDidCreateScriptContex(WebWindow* webView, wkeWebFrameHandle frameId, void* context, int extensionGroup, int worldId) {}
 
+	virtual jsValue handlerJsMsgloop(WebWindow* webView, jsExecState es) { return jsUndefined(); }
 };
 

@@ -145,12 +145,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         }
 
         MainWnd mainWindow;
-        if (!WebWindow::createWebWindow(L"sdff", &mainWindow,L"www.baidu.com",
-            WKE_WINDOW_TYPE_TRANSPARENT, NULL, 0, 0, 640, 480))
+        if (!WebWindow::createWebWindow(L"sdff", &mainWindow,L"E:\\HyacinthFolder\\webres\\index.html",
+            WKE_WINDOW_TYPE_POPUP, NULL, 0, 0, 640, 480))
         {
             PostQuitMessage(0);
             break;
         }
+
 
 
         runMessageLoop(&app);
