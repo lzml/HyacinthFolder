@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="窗口">
+      <UniqueIdentifier>{e1ddf484-d9df-4579-92ff-30c42ca54c2e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -27,9 +30,30 @@
     <ClInclude Include="HyacinthFolder.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\miniblink\wke.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IWebCallback.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="WebWindow.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MainWnd.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HyacinthFolder.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="IWebCallback.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="WebWindow.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MainWnd.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

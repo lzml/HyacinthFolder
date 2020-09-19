@@ -14,10 +14,16 @@
 #include <memory.h>
 #include <tchar.h>
 
+#include "../miniblink/wke.h"
 
 #include <base/message_loop/message_loop.h>
 #include <base/win/wrapped_window_proc.h>
 
+#include <base/files/file_path.h>
+
+#include <base/base_paths.h>
+#include <base/base_paths_win.h>
+#include <base/path_service.h>
 
 
 
