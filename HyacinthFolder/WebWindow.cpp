@@ -11,9 +11,10 @@ bool WebWindow::createWebWindow(std::wstring title, IWebCallback* webCallback,st
 		return false;
 	}
 
-	//HWND hwnd = wkeGetWindowHandle(view);
+	HWND hwnd = wkeGetWindowHandle(view);
 	//LONG style = GetWindowLong(hwnd, GWL_STYLE);
-	//SetWindowLong(hwnd, GWL_STYLE, style & ~WS_CAPTION  );
+	//SetWindowLong(hwnd, GWL_STYLE, style & ~WS_CAPTION);
+	//::SetWindowPos(hwnd, NULL, 0, 0, 1920, 500, SWP_SHOWWINDOW);
 
 	WebWindow* webWnd = new WebWindow;
 	webWnd->webWindow_ = view;
@@ -97,13 +98,6 @@ bool WebWindow::handWindowClosing(wkeWebView webWindow, void* param)
 	 if (!pWebWindow)	return nullptr;
 	 return pWebWindow->webCallback_->handlerCreateView(pWebWindow, navType, url, features);
  }
-
- //void WebWindow::handReadJsFile(const wchar_t* path, std::vector<char>* buffer)
- //{
-	// WebWindow* pWebWindow = (WebWindow*)param;
-	// if (!pWebWindow)	return ;
-	// return pWebWindow->webCallback_->handlerReadJsFile(pWebWindow, path, buffer);
- //}
 
  bool WebWindow::handLoadUrlBegin(wkeWebView webView, void* param, const char* url, void* job)
 {

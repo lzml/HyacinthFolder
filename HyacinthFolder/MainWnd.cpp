@@ -7,7 +7,7 @@ void MainWnd::initWebWindow(WebWindow* webWindow)
 
 	//wkeJsBindFunction("eMsg", &onMsg, nullptr, 5);
 	//wkeJsBindFunction("eShellExec", &onShellExec, nullptr, 3);
-	wkeMoveToCenter(view);
+	//wkeMoveToCenter(view);
 	wkeLoadURLW(view, webWindow->getInitUrl());
 
 	
