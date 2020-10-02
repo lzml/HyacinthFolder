@@ -16,6 +16,15 @@
     <Filter Include="窗口">
       <UniqueIdentifier>{e1ddf484-d9df-4579-92ff-30c42ca54c2e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="resfile">
+      <UniqueIdentifier>{30ff712d-65d9-44b3-aa3c-a3fe2d80920e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="res2">
+      <UniqueIdentifier>{5c6f8da2-aefd-435f-adbe-2142ab657880}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="XML">
+      <UniqueIdentifier>{f922e8f8-5a78-4cc6-99c0-6c7616a2e5a8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -42,6 +51,15 @@
     <ClInclude Include="MainWnd.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="res2\resString.h">
+      <Filter>res2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\thirdpart\tinyxml2\tinyxml2.h">
+      <Filter>XML</Filter>
+    </ClInclude>
+    <ClInclude Include="res2\SResLoader.h">
+      <Filter>res2</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HyacinthFolder.cpp">
@@ -56,6 +74,12 @@
     <ClCompile Include="MainWnd.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\thirdpart\tinyxml2\tinyxml2.cpp">
+      <Filter>XML</Filter>
+    </ClCompile>
+    <ClCompile Include="res2\SResLoader.cpp">
+      <Filter>res2</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="HyacinthFolder.rc">
@@ -69,5 +93,10 @@
     <Image Include="HyacinthFolder.ico">
       <Filter>资源文件</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\bin\resfile\string.xml">
+      <Filter>resfile</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

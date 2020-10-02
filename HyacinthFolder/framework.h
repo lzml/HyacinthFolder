@@ -19,13 +19,17 @@
 #include <base/message_loop/message_loop.h>
 #include <base/win/wrapped_window_proc.h>
 
+#include <base/memory/singleton.h>
+
 #include <base/files/file_path.h>
 
 #include <base/base_paths.h>
 #include <base/base_paths_win.h>
 #include <base/path_service.h>
 
-
+#include <base/strings/string16.h>
+#include <base/strings/string_util.h>
+#include <base/strings/utf_string_conversions.h>
 
 #define CLASSNAME   L"HyacinthFolderClass"
 

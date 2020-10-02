@@ -4,6 +4,9 @@
 #include "framework.h"
 #include "HyacinthFolder.h"
 #include "MainWnd.h"
+#include "res2/SResLoader.h"
+#include <base/at_exit.h>
+#include "res2/resString.h"
 
 //DWORD kExceptionCode = 12345;
 //WPARAM kCrashMsg = 98765;
@@ -114,51 +117,58 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     //ShowWindow(window, SW_SHOWNORMAL);
 
     //loop.Run();
+	if (!isOneInstance()) {
+		::MessageBoxW(NULL, L"该进程已经启动", L"错误", MB_OK);
+		return 0;
+	}
 
-    if (!isOneInstance()) {
-        ::MessageBoxW(NULL, L"该进程已经启动", L"错误", MB_OK);
-        return 0;
-    }
 
-    do
-    {
-        base::FilePath  path_current_dir;
-        if (!base::PathProvider(base::BasePathKey::DIR_EXE, &path_current_dir))
-        {
-            break;
-        }
+    {	//单例生命期范围
+		base::AtExitManager exit_manager;
+		SResStringLoader::GetInstance()->initInstance();
+
+		do
+		{
+			base::FilePath  path_current_dir;
+			if (!base::PathProvider(base::BasePathKey::DIR_EXE, &path_current_dir))
+			{
+				break;
+			}
 #ifdef _DEBUG
-        base::FilePath path_mb(L"E:\\HyacinthFolder\\miniblink\\miniblink_x64.dll");// path_current_dir.AppendASCII("..\\..\\miniblink\\node.dll");
+			base::FilePath path_mb(L"E:\\HyacinthFolder\\miniblink\\miniblink_x64.dll");// path_current_dir.AppendASCII("..\\..\\miniblink\\node.dll");
 #else
 #endif // DEBUG
 
 
-        std::vector<wchar_t> vmbPath;
-        std::wstring tmp = path_mb.AsUTF16Unsafe();
-        vmbPath.assign(tmp.begin(), tmp.end());
-        vmbPath.push_back('\0');
+			std::vector<wchar_t> vmbPath;
+			std::wstring tmp = path_mb.AsUTF16Unsafe();
+			vmbPath.assign(tmp.begin(), tmp.end());
+			vmbPath.push_back('\0');
 
-        wkeSetWkeDllPath(&vmbPath[0]);
-        if ( !wkeInitialize())
-        {
-            break;
-        }
+			wkeSetWkeDllPath(&vmbPath[0]);
+			if (!wkeInitialize())
+			{
+				break;
+			}
 
-        MainWnd mainWindow;
-        if (!WebWindow::createWebWindow(L"sdff", &mainWindow,L"E:\\HyacinthFolder\\webres\\index.html",
-            WKE_WINDOW_TYPE_TRANSPARENT, NULL, 0, 0, 1920, 1048))
-        {
-            PostQuitMessage(0);
-            break;
-        }
+			MainWnd mainWindow;
+			if (!WebWindow::createWebWindow(GETRESSTRINGW(ResString::title_main), &mainWindow, L"E:\\HyacinthFolder\\webres\\index.html",
+				WKE_WINDOW_TYPE_TRANSPARENT, NULL, 0, 0, 1920, 1048))
+			{
+				PostQuitMessage(0);
+				break;
+			}
 
 
 
-        runMessageLoop(&app);
+			runMessageLoop(&app);
 
-    } while (0);
+		} while (0);
 
-    wkeFinalize();
+		wkeFinalize();
+    }
+    
+
 
     return 0;
 }
