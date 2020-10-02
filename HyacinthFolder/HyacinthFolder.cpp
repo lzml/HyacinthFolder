@@ -126,7 +126,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     {	//单例生命期范围
 		base::AtExitManager exit_manager;
 		SResStringLoader::GetInstance()->initInstance();
-
+	
 		do
 		{
 			base::FilePath  path_current_dir;

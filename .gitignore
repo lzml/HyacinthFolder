@@ -36,3 +36,7 @@
 /base
 /HyacinthFolder/x64/Debug
 /HyacinthFolder/res2/resString.h
+/obj
+/tools/resFileFactory/.vs/resFileFactory/v16
+*.ilk
+*.pdb

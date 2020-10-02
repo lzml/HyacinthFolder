@@ -18,3 +18,12 @@ body {
     background: #3597ff;
     -webkit-app-region: drag;
 } */
+
+#app{
+    position: relative;
+    top:0px;
+    left:0px;
+    width: 100px;
+    height: 100px;
+    background: #561235;
+}

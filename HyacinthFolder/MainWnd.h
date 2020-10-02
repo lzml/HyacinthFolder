@@ -11,6 +11,9 @@ public:
 	
 	void handlerDocumentReady(WebWindow* webWindow) final;
 
-	jsValue handlerJsMsgloop(WebWindow* webView, jsExecState es) final;
+	jsValue handlerJsMsgloop(WebWindow* webWindow, jsExecState es) final;
+
+	bool handlerWindowClosing(WebWindow* webWindow) final;
+	void handlerWindowDestroy(WebWindow* webWindow) final;
 };
 

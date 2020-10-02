@@ -15,6 +15,17 @@ void MainWnd::initWebWindow(WebWindow* webWindow)
 }
 
 
+bool MainWnd::handlerWindowClosing(WebWindow* webWindow)
+{
+	 return true; 
+}
+
+void MainWnd::handlerWindowDestroy(WebWindow* webWindow)
+{
+	PostQuitMessage(0);
+}
+
+
 void MainWnd::handlerDocumentReady(WebWindow* webWindow)
 {
 	
@@ -23,7 +34,7 @@ void MainWnd::handlerDocumentReady(WebWindow* webWindow)
 
 }
 
-jsValue MainWnd::handlerJsMsgloop(WebWindow* webView, jsExecState es)
+jsValue MainWnd::handlerJsMsgloop(WebWindow* webWindow, jsExecState es)
 {
 	int argCount = jsArgCount(es);
 	if (argCount < 1)
@@ -34,7 +45,8 @@ jsValue MainWnd::handlerJsMsgloop(WebWindow* webView, jsExecState es)
 
 	if ("close" == msg)
 	{
-
+		HWND hwnd = wkeGetWindowHandle(webWindow->getWkeWebView());
+		::PostMessageW(hwnd, WM_CLOSE, 0, 0);
 	}
 
 	return jsUndefined();

@@ -43,7 +43,7 @@ void SResStringLoader::initInstance()
 	for (node = stringElements->FirstChildElement();  node; node = node->NextSiblingElement())
 	{
 		tmp.clear();
-		tmp = base::ASCIIToUTF16(node->GetText());
+		tmp = base::UTF8ToWide(node->GetText());
 		resString_.push_back(tmp);
 	}
 
