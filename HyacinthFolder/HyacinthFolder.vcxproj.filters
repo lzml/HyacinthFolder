@@ -22,8 +22,14 @@
     <Filter Include="res2">
       <UniqueIdentifier>{5c6f8da2-aefd-435f-adbe-2142ab657880}</UniqueIdentifier>
     </Filter>
-    <Filter Include="XML">
+    <Filter Include="thirdpart">
+      <UniqueIdentifier>{2c77327a-ee4a-425d-aa69-e33d8d36d1d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="thirdpart\XML">
       <UniqueIdentifier>{f922e8f8-5a78-4cc6-99c0-6c7616a2e5a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="jsCpp">
+      <UniqueIdentifier>{f82d783c-c21f-4a62-bd44-328b31936658}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -55,10 +61,13 @@
       <Filter>res2</Filter>
     </ClInclude>
     <ClInclude Include="..\thirdpart\tinyxml2\tinyxml2.h">
-      <Filter>XML</Filter>
+      <Filter>thirdpart\XML</Filter>
     </ClInclude>
     <ClInclude Include="res2\SResLoader.h">
       <Filter>res2</Filter>
+    </ClInclude>
+    <ClInclude Include="FileAttribute.h">
+      <Filter>jsCpp</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -75,10 +84,13 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\thirdpart\tinyxml2\tinyxml2.cpp">
-      <Filter>XML</Filter>
+      <Filter>thirdpart\XML</Filter>
     </ClCompile>
     <ClCompile Include="res2\SResLoader.cpp">
       <Filter>res2</Filter>
+    </ClCompile>
+    <ClCompile Include="FileAttribute.cpp">
+      <Filter>jsCpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

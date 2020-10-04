@@ -1,9 +1,18 @@
 <html>
 
 <head>
-    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="vue.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link type="text/css" rel="stylesheet" href="style.css">
+    <script>
+        function getDirList()
+        {
+            var ele = document.getElementById('dir_input');
+            eMsg('dirlist  ');
+            
+            alert(ele.value) ;
+        }
+    </script>
 </head>
 
 <body style="background: #00ffffff;">
@@ -14,8 +23,8 @@
     {{positionY}}
 
         <div id="caption" style="height:50;width: auto; background: cornflowerblue;">
-            <input style="width: 400;">
-            <button onClick="">载入路径</button>
+            <input id="dir_input" style="width: 400;">
+            <button onClick="getDirList()">载入路径</button>
             <button onClick="eMsg('close')">关闭窗口</button>
         </div>
         <!--左侧栏-->

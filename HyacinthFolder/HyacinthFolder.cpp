@@ -6,6 +6,7 @@
 #include "MainWnd.h"
 #include "res2/SResLoader.h"
 #include <base/at_exit.h>
+#include <base/threading/thread.h>
 #include "res2/resString.h"
 
 //DWORD kExceptionCode = 12345;
@@ -102,6 +103,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
 
+
     //base::MessageLoop loop(base::MessageLoop::TYPE_UI);
     //std::wstring class_name(CLASSNAME);
 
@@ -135,7 +137,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 				break;
 			}
 #ifdef _DEBUG
-			base::FilePath path_mb(L"E:\\HyacinthFolder\\miniblink\\miniblink_x64.dll");// path_current_dir.AppendASCII("..\\..\\miniblink\\node.dll");
+			base::FilePath path_mb(L"..\\miniblink\\miniblink_x64.dll");// path_current_dir.AppendASCII("..\\..\\miniblink\\node.dll");
 #else
 #endif // DEBUG
 
@@ -152,7 +154,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			}
 
 			MainWnd mainWindow;
-			if (!WebWindow::createWebWindow(GETRESSTRINGW(ResString::title_main), &mainWindow, L"E:\\HyacinthFolder\\webres\\index.html",
+			base::FilePath pathIndexHtml = path_current_dir.AppendASCII("..\\webres\\index.html");
+			if (!WebWindow::createWebWindow(GETRESSTRINGW(ResString::title_main), &mainWindow, pathIndexHtml.AsUTF16Unsafe(),
 				WKE_WINDOW_TYPE_TRANSPARENT, NULL, 0, 0, 1920, 1048))
 			{
 				PostQuitMessage(0);

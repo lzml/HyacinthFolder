@@ -160,6 +160,7 @@
   <ItemGroup>
     <ClInclude Include="..\miniblink\wke.h" />
     <ClInclude Include="..\thirdpart\tinyxml2\tinyxml2.h" />
+    <ClInclude Include="FileAttribute.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="HyacinthFolder.h" />
     <ClInclude Include="IWebCallback.h" />
@@ -172,6 +173,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\thirdpart\tinyxml2\tinyxml2.cpp" />
+    <ClCompile Include="FileAttribute.cpp" />
     <ClCompile Include="HyacinthFolder.cpp" />
     <ClCompile Include="IWebCallback.cpp" />
     <ClCompile Include="MainWnd.cpp" />
