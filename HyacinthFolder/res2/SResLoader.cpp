@@ -5,13 +5,19 @@
 #include "../../thirdpart/tinyxml2/tinyxml2.h"
 
 
+
+
+
+
 SResStringLoader::SResStringLoader()
 {
 }
 
 SResStringLoader::~SResStringLoader()
 {
+	resString_.clear();
 }
+
 
 SResStringLoader* SResStringLoader::GetInstance()
 {

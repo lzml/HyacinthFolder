@@ -169,6 +169,7 @@
     <ClInclude Include="res2\SResLoader.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="MsgThreadManager.h" />
     <ClInclude Include="WebWindow.h" />
   </ItemGroup>
   <ItemGroup>
@@ -178,6 +179,7 @@
     <ClCompile Include="IWebCallback.cpp" />
     <ClCompile Include="MainWnd.cpp" />
     <ClCompile Include="res2\SResLoader.cpp" />
+    <ClCompile Include="MsgThreadManager.cpp" />
     <ClCompile Include="WebWindow.cpp" />
   </ItemGroup>
   <ItemGroup>

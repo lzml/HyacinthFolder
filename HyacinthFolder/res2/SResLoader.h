@@ -8,10 +8,10 @@ class SResStringLoader;
 #define  GETRESSTRINGA(x)   SResStringLoader::GetInstance()->GetResStringA(x)
 
 
-class SResStringLoader  
+class SResStringLoader
 {
 public:
-	SResStringLoader();
+	explicit SResStringLoader();
 	~SResStringLoader();
 
 	static  SResStringLoader* GetInstance();

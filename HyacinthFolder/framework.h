@@ -16,6 +16,9 @@
 
 #include "../miniblink/wke.h"
 
+#include <base/bind_internal.h>
+#include <base/bind.h>
+
 #include <base/message_loop/message_loop.h>
 #include <base/win/wrapped_window_proc.h>
 

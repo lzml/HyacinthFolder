@@ -8,6 +8,7 @@
 #include <base/at_exit.h>
 #include <base/threading/thread.h>
 #include "res2/resString.h"
+#include "MsgThreadManager.h"
 
 //DWORD kExceptionCode = 12345;
 //WPARAM kCrashMsg = 98765;
@@ -31,58 +32,6 @@ bool isOneInstance()
 }
 
 
-//jsValue onMsg(jsExecState es, void* param)
-//{
-//    int argCount = jsArgCount(es);
-//    if (argCount < 1)
-//        return jsUndefined();
-//
-//    jsType type = jsArgType(es, 0);
-//    if (JSTYPE_STRING != type)
-//        return jsUndefined();
-//
-//    jsValue arg0 = jsArg(es, 0);
-//    std::string msgOutput = "eMsg:";
-//    std::string msg = jsToTempString(es, arg0);
-//    msgOutput = msgOutput + msg;
-//    msgOutput += "\n";
-//    OutputDebugStringA(msgOutput.c_str());
-//
-//    if ("close" == msg) {
-//        //blinkClose();
-//    }
-//    else if ("max" == msg) {
-//        //blinkMaximize();
-//    }
-//    else if ("min" == msg) {
-//        //blinkMinimize();
-//    }
-//
-//    return jsUndefined();
-//}
-//
-//jsValue WKE_CALL_TYPE onShellExec(jsExecState es, void* param)
-//{
-//    if (0 == jsArgCount(es))
-//        return jsUndefined();
-//    jsValue arg0 = jsArg(es, 0);
-//    if (!jsIsString(arg0))
-//        return jsUndefined();
-//
-//    std::string path;
-//    path = jsToTempString(es, arg0);
-//    if ("runEchars" == path) {
-//        //createECharsTest();
-//    }
-//    else if ("wkeBrowser" == path) {
-//       // wkeBrowserMain(nullptr, nullptr, nullptr, TRUE);
-//    }
-//
-//    path += "\n";
-//    OutputDebugStringA(path.c_str());
-//
-//    return jsUndefined();
-//}
 
 
 void runMessageLoop(Application* app)
@@ -125,10 +74,15 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	}
 
 
-    {	//单例生命期范围
+    {
+		//消息循环
+		base::MessageLoopForUI loop;
+		//全局单例生命期范围
 		base::AtExitManager exit_manager;
-		SResStringLoader::GetInstance()->initInstance();
-	
+		SResStringLoader::GetInstance()->initInstance();		
+		base::WeakPtrFactory<base::MessageLoopForUI> factory(&loop);
+		MsgThreadManager::GetInstance()->addUiThead(factory.GetWeakPtr());
+
 		do
 		{
 			base::FilePath  path_current_dir;
@@ -161,10 +115,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 				PostQuitMessage(0);
 				break;
 			}
+			
 
+			
 
+			//runMessageLoop(&app);
 
-			runMessageLoop(&app);
+			loop.Run();
 
 		} while (0);
 

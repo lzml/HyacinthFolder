@@ -54,9 +54,6 @@
     <ClInclude Include="WebWindow.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="MainWnd.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="res2\resString.h">
       <Filter>res2</Filter>
     </ClInclude>
@@ -69,6 +66,12 @@
     <ClInclude Include="FileAttribute.h">
       <Filter>jsCpp</Filter>
     </ClInclude>
+    <ClInclude Include="MainWnd.h">
+      <Filter>窗口</Filter>
+    </ClInclude>
+    <ClInclude Include="MsgThreadManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HyacinthFolder.cpp">
@@ -80,9 +83,6 @@
     <ClCompile Include="WebWindow.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="MainWnd.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\thirdpart\tinyxml2\tinyxml2.cpp">
       <Filter>thirdpart\XML</Filter>
     </ClCompile>
@@ -91,6 +91,12 @@
     </ClCompile>
     <ClCompile Include="FileAttribute.cpp">
       <Filter>jsCpp</Filter>
+    </ClCompile>
+    <ClCompile Include="MainWnd.cpp">
+      <Filter>窗口</Filter>
+    </ClCompile>
+    <ClCompile Include="MsgThreadManager.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
