@@ -48,7 +48,7 @@ void MsgThreadManager::postTask(ThreadKind id, const tracked_objects::Location& 
 		auto p = thread_list_.at(id).get();
 		if (p && p->IsRunning())
 		{
-			p->message_loop()->PostTask(from_here, task);	
+			p->task_runner()->PostTask(from_here, task);
 			return;
 		}
 	}

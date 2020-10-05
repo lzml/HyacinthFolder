@@ -66,13 +66,19 @@
     <ClInclude Include="FileAttribute.h">
       <Filter>jsCpp</Filter>
     </ClInclude>
-        <ClInclude Include="MainWnd.h">
+    <ClInclude Include="MainWnd.h">
       <Filter>窗口</Filter>
     </ClInclude>
     <ClInclude Include="MsgThreadManager.h">
       <Filter>头文件</Filter>
     </ClInclude>
-        <ClInclude Include="FileSearcher.h">
+    <ClInclude Include="FileSearcher.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="FileSearcherThread.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Any.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -95,13 +101,16 @@
     <ClCompile Include="FileAttribute.cpp">
       <Filter>jsCpp</Filter>
     </ClCompile>
-        <ClCompile Include="MainWnd.cpp">
+    <ClCompile Include="MainWnd.cpp">
       <Filter>窗口</Filter>
     </ClCompile>
     <ClCompile Include="MsgThreadManager.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-        <ClCompile Include="FileSearcher.cpp">
+    <ClCompile Include="FileSearcher.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="FileSearcherThread.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

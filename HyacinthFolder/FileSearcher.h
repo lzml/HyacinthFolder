@@ -6,6 +6,7 @@
 class FileSearcher
 {
 public:
+	virtual	~FileSearcher() {}
 	/// <summary>
 	/// ²éÕÒÂ·¾¶
 	/// </summary>

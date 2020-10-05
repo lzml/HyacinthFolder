@@ -40,3 +40,4 @@
 /tools/resFileFactory/.vs/resFileFactory/v16
 *.ilk
 *.pdb
+/bin/debug.log

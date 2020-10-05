@@ -19,7 +19,7 @@ int FileSearcher::findPath(const char* lpPath)
 	strcpy_s(szPath, lpPath);
 	strcat_s(szPath, "\\*.*");
 
-	hFile = FindFirstFile(szPath, &wfd);
+	hFile = FindFirstFileA(szPath, &wfd);
 	if (hFile != INVALID_HANDLE_VALUE)
 	{
 		do {
@@ -49,7 +49,7 @@ int FileSearcher::findPath(const char* lpPath)
 				fprintf_s(pf_path_file, "%s\n", buf);*/
 				++cnt;
 			}
-		} while (FindNextFile(hFile, &wfd));
+		} while (FindNextFileA(hFile, &wfd));
 	}
 	return cnt;
 }

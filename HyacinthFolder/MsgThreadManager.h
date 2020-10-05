@@ -11,7 +11,7 @@
 
 enum class ThreadKind {
 	UI,
-
+	FileSearcherThread,
 };
 
 
