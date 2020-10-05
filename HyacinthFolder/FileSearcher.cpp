@@ -1,89 +1,42 @@
 #include "FileSearcher.h"
-#include "framework.h"
-#include <base/at_exit.h>
-#include <base/threading/thread.h>
-#include "res2/resString.h"
 
-int FileSearcher::findPath(const char* lpPath)
+int FileSearcher::findPath(_In_ const wchar_t* lpPath, _Out_ std::vector<FileAttribute>& outFiles)
 {
-	static int cnt = 0;
 	HANDLE hFile;
-	WIN32_FIND_DATAA wfd;
+	WIN32_FIND_DATAW wfd;
+	int counter = 0;
 
-	char szPath[MAX_PATH] = { 0 };
-	char buf[MAX_PATH * 2] = { 0 };
-	char fileName[MAX_PATH] = { 0 };
-	char temp[MAX_PATH] = { 0 };//临时数组;
-	char parseFileName[MAX_PATH] = { 0 };
+	wchar_t szPath[MAX_PATH] = { 0 };
 
-	strcpy_s(szPath, lpPath);
-	strcat_s(szPath, "\\*.*");
+	wcscpy_s(szPath, lpPath);
+	wcscat_s(szPath, L"\\*.*");
 
-	hFile = FindFirstFileA(szPath, &wfd);
+	hFile = FindFirstFile(szPath, &wfd);
 	if (hFile != INVALID_HANDLE_VALUE)
 	{
 		do {
-			if (wfd.cFileName[0] == '.')
-				continue;
-			else if (wfd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
-			{
-				strcpy_s(szPath, lpPath);
-				strcat_s(szPath, "\\");
-				strcat_s(szPath, wfd.cFileName);
+			FileAttribute fileItem;
+			fileItem.cFileName = wfd.cFileName;
+			fileItem.cAlternateFileName = wfd.cAlternateFileName;
+			fileItem.dwFileAttributes = wfd.dwFileAttributes;
+			fileItem.ftCreationTime = to_int64(wfd.ftCreationTime);
+			fileItem.ftLastAccessTime = to_int64(wfd.ftLastAccessTime);
+			fileItem.ftLastWriteTime = to_int64(wfd.ftLastWriteTime);
+			fileItem.nFileSizeHigh = wfd.nFileSizeHigh;
+			fileItem.nFileSizeLow = wfd.nFileSizeLow;
 
-				findPath(szPath);
-			}
-			else
-			{
-				strcpy_s(parseFileName, wfd.cFileName);
-				strExtension(parseFileName);
-
-				strcpy_s(fileName, lpPath);//合成文件名全路径
-				strcat_s(fileName, "\\");
-				strcat_s(fileName, wfd.cFileName);/* 例："c:\dir\test\1.pgm" */
-
-				strcpy_s(temp, lpPath);
-				strTok(temp); //获取目录
-
-				/*sprintf_s(buf, "%s;%s", fileName, result);
-				fprintf_s(pf_path_file, "%s\n", buf);*/
-				++cnt;
-			}
-		} while (FindNextFileA(hFile, &wfd));
+			outFiles.push_back(fileItem);
+			++counter;
+		} while (FindNextFile(hFile, &wfd));
 	}
-	return cnt;
+	return counter;
 }
 
-int FileSearcher::findPathSaveFile(const char* lp_path, const char* out_file_name)
+FileSearcher::~FileSearcher()
 {
-	fopen_s(&pf_path_file, out_file_name, "w");
-	int cnt = findPath(lp_path);
-	fclose(pf_path_file);
-	return cnt;
 }
 
-void FileSearcher::strTok(char* str)
+__int64 FileSearcher::to_int64(FILETIME ft)
 {
-	char* p = NULL;
-	char* ptr = NULL;
-	char delims[] = "\\";
-	p = strtok_s(str, delims, &ptr);
-	while (p != NULL)
-	{
-		strcpy_s(result, p);
-		p = strtok_s(NULL, delims, &ptr);
-	};
-}
-
-void FileSearcher::strExtension(char* str)
-{
-	char* p = NULL;
-	char* ptr = NULL;
-	char delims[] = ".";
-	p = strtok_s(str, delims, &ptr);
-	while (p != NULL)
-	{
-		strcpy_s(result, p);
-		p = strtok_s(NULL, delims, &ptr);
-	}
+	return static_cast<__int64>(ft.dwHighDateTime) << 32 | ft.dwLowDateTime;
 }

@@ -1,5 +1,7 @@
 #pragma once
-#include <cstdio>
+
+#include "framework.h"
+#include "FileAttribute.h"
 
 #define MAX_PATH  1000
 
@@ -10,24 +12,16 @@ public:
 	/// <summary>
 	/// 查找路径
 	/// </summary>
-	int findPath(const char* lpPath);
+	int findPath(_In_ const wchar_t* lpPath, _Out_ std::vector<FileAttribute>& outFiles);
 
-	int findPathSaveFile(const char* lp_path, const char* out_file_name);
+	~FileSearcher();
 
 private:
-	char save_path[MAX_PATH] = { 0 };//结果输出路径;    
-	char thePath[MAX_PATH] = { 0 };
-	char result[MAX_PATH] = { 0 };
-	FILE* pf_path_file;
+	wchar_t result[MAX_PATH];
 
 	/// <summary>
-	/// 字符串分割，这里主要用于文件名分割扩展
+	/// 时间转换
 	/// </summary>
-	void strTok(char* str);
-
-	/// <summary>
-	/// 分割扩展名
-	/// </summary>
-	void strExtension(char* str);
+	__int64 to_int64(FILETIME ft);
 };
 
