@@ -37,3 +37,6 @@ private:
 
 void MSGPOSTTASK(ThreadKind id, const tracked_objects::Location& from_here,
 	const base::Closure& task);
+
+void MSGPOSTTASK(ThreadKind id, const tracked_objects::Location& from_here,
+	std::function<void(void)> func);

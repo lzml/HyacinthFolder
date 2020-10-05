@@ -1,5 +1,6 @@
 #include "MsgThreadManager.h"
 #include <base/memory/singleton.h>
+#include <base/bind.h>
 
 MsgThreadManager::MsgThreadManager()
 {
@@ -59,4 +60,16 @@ void MSGPOSTTASK(ThreadKind id, const tracked_objects::Location& from_here,
 	const base::Closure& task)
 {
 	MsgThreadManager::GetInstance()->postTask(id, from_here, task);
+}
+
+void FunctionToClosure(const std::function<void(void)>& func)
+{
+	func();
+}
+
+void MSGPOSTTASK(ThreadKind id, const tracked_objects::Location& from_here,
+	std::function<void(void)> func)
+{
+	base::Closure closu = base::Bind(&FunctionToClosure, std::move(func));
+	MsgThreadManager::GetInstance()->postTask(id, from_here, std::move(closu));
 }

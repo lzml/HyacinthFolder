@@ -41,3 +41,4 @@
 *.ilk
 *.pdb
 /bin/debug.log
+/bin/LocalStorage

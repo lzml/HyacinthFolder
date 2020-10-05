@@ -5,12 +5,18 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link type="text/css" rel="stylesheet" href="style.css">
     <script>
+        function getDirListCallback(fileArray)
+        {
+            var ele = 1;
+            alert(fileArray);
+        }
         function getDirList()
         {
             var ele = document.getElementById('dir_input');
-            eMsg('dirlist  ');
+            //正常操作应该是  js请求指定路径的信息，c++异步获取， 然后c++异步回调js函数
+            eMsg('getFilelist',ele.value, getDirListCallback);
             
-            alert(ele.value) ;
+            alert() ;
         }
     </script>
 </head>
