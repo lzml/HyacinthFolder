@@ -73,7 +73,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	}
 	{
 		FileSearcher fileSearcher;
-		fileSearcher.findPath("D:");
+		std::vector<FileAttribute> curFiles;
+		fileSearcher.findPath(L"D:", curFiles);
 	}
 
     {
