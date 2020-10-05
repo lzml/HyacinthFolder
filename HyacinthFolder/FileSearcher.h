@@ -14,7 +14,7 @@ public:
 	/// </summary>
 	int findPath(_In_ const wchar_t* lpPath, _Out_ std::vector<FileAttribute>& outFiles);
 
-	~FileSearcher();
+
 
 private:
 	wchar_t result[MAX_PATH];

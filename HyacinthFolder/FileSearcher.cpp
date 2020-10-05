@@ -32,9 +32,7 @@ int FileSearcher::findPath(_In_ const wchar_t* lpPath, _Out_ std::vector<FileAtt
 	return counter;
 }
 
-FileSearcher::~FileSearcher()
-{
-}
+
 
 __int64 FileSearcher::to_int64(FILETIME ft)
 {
