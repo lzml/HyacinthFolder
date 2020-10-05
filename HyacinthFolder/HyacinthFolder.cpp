@@ -10,9 +10,10 @@
 #include "res2/resString.h"
 #include "MsgThreadManager.h"
 
+#include "FileSearcher.h"
+
 //DWORD kExceptionCode = 12345;
 //WPARAM kCrashMsg = 98765;
-
 
 typedef struct {
     wkeWebView window;
@@ -33,7 +34,6 @@ bool isOneInstance()
 
 
 
-
 void runMessageLoop(Application* app)
 {
     MSG msg = { 0 };
@@ -42,7 +42,6 @@ void runMessageLoop(Application* app)
         DispatchMessageW(&msg);
     }
 }
-
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -72,12 +71,15 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		::MessageBoxW(NULL, L"该进程已经启动", L"错误", MB_OK);
 		return 0;
 	}
-
+	{
+		FileSearcher fileSearcher;
+		fileSearcher.findPath("D:");
+	}
 
     {
 		//消息循环
 		base::MessageLoopForUI loop;
-		//全局单例生命期范围
+		//单例生命期范围
 		base::AtExitManager exit_manager;
 		SResStringLoader::GetInstance()->initInstance();		
 		base::WeakPtrFactory<base::MessageLoopForUI> factory(&loop);

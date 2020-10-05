@@ -43,7 +43,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -161,6 +161,7 @@
     <ClInclude Include="..\miniblink\wke.h" />
     <ClInclude Include="..\thirdpart\tinyxml2\tinyxml2.h" />
     <ClInclude Include="FileAttribute.h" />
+    <ClInclude Include="FileSearcher.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="HyacinthFolder.h" />
     <ClInclude Include="IWebCallback.h" />
@@ -175,6 +176,7 @@
   <ItemGroup>
     <ClCompile Include="..\thirdpart\tinyxml2\tinyxml2.cpp" />
     <ClCompile Include="FileAttribute.cpp" />
+    <ClCompile Include="FileSearcher.cpp" />
     <ClCompile Include="HyacinthFolder.cpp" />
     <ClCompile Include="IWebCallback.cpp" />
     <ClCompile Include="MainWnd.cpp" />
