@@ -12,7 +12,7 @@ public:
 	/// <summary>
 	/// ≤È’“¬∑æ∂
 	/// </summary>
-	int findPath(_In_ const wchar_t* lpPath, _Out_ std::vector<FileAttribute>& outFiles);
+	int findPath(_In_ const wchar_t* lpPath, _Out_ std::vector<pFileAttribute>& outFiles);
 
 
 

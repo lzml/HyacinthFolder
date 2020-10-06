@@ -1,11 +1,14 @@
 #pragma once
 #include "WebWindow.h"
+#include "JsFileArrayObject.h"
+#include "FileSearcherThread.h"
 
 
 class MainWnd :  public IWebCallback
+	,  public base::SupportsWeakPtr<MainWnd>
 {
 public:
-	MainWnd() {};
+	MainWnd();
 
 	void initWebWindow(WebWindow* webWindow) final;
 	
@@ -15,5 +18,13 @@ public:
 
 	bool handlerWindowClosing(WebWindow* webWindow) final;
 	void handlerWindowDestroy(WebWindow* webWindow) final;
+
+
+private:
+	void fileSearcherResultCallback(jsValue jsCallback, const FileSearcherThread::SearcherDataList& list );
+
+private:
+	JsFileArrayObject* jsFileArrayObject_;
+	WebWindow* webWnd_;
 };
 

@@ -1,6 +1,6 @@
 #include "FileSearcherThread.h"
 #include <base/bind.h>
-
+#include "MsgThreadManager.h"
 
 
 FileSearcherThread::FileSearcherThread()
@@ -17,15 +17,46 @@ void FileSearcherThread::Init()
 }
 
 
-void FileSearcherThread::DoWork1(const fileSearcherWorkId workId, SearcherDataList args,
-	base::Callback<void(SearcherDataList&&)> callback)
+void FileSearcherThread::DispatchTask(const tracked_objects::Location& from_here,
+	const fileSearcherWorkId workId, const SearcherDataList& args,
+	const base::Callback<void(const SearcherDataList&)>& callback)
+{
+	MsgThreadInfo &&info =  MsgThreadManager::GetInstance()->getThread(ThreadKind::FileSearcherThread);
+	
+	if (info.base && info.base->IsRunning())
+	{
+		auto pWeakThread = info.real.AnyCast<base::WeakPtr<FileSearcherThread>>();
+		auto p = pWeakThread.get();
+		if (p)
+		{
+			p->DoWork1(workId, args, callback);
+		}
+	}
+
+	
+}
+
+void FileSearcherThread::DoWork1(const fileSearcherWorkId workId, const SearcherDataList& args,
+	const base::Callback<void(const SearcherDataList&)>& callback)
 {
 	std::vector<base::Any> result;
 	if (fileSearcherWorkId::eNumOneFolder == workId)
 	{
-		int m = 0;
-		//file_searcher_->findPath(std::forward<Args>(args) ...);
+		if (args.size() > 0)
+		{
+			auto args0 = args.at(0);
+			std::wstring strPath = args0.AnyCast<std::wstring>();
 
+			std::vector<pFileAttribute> fileList;
+			file_searcher_->findPath(strPath.c_str(), fileList);
+
+			for (auto it = fileList.begin(); it != fileList.end(); it ++ )
+			{
+				base::Any a = *it;
+				result.emplace_back(a);
+			}
+		}
+		
 	}
 	else
 	{
@@ -35,7 +66,7 @@ void FileSearcherThread::DoWork1(const fileSearcherWorkId workId, SearcherDataLi
 
 
 void FileSearcherThread::DoWork2(const fileSearcherWorkId workId, SearcherDataList args,
-	std::function<void(SearcherDataList &&)> callback)
+	std::function<void(const SearcherDataList &)> callback)
 {
 	std::vector<base::Any> result;
 	if (fileSearcherWorkId::eNumOneFolder == workId)

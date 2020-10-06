@@ -8,7 +8,10 @@
         function getDirListCallback(fileArray)
         {
             var ele = 1;
-            alert(fileArray);
+            
+            alert('文件名字' + fileArray[3].fileName);
+            alert('是否只读' + fileArray[3].bReadOnly);
+            
         }
         function getDirList()
         {
@@ -16,7 +19,7 @@
             //正常操作应该是  js请求指定路径的信息，c++异步获取， 然后c++异步回调js函数
             eMsg('getFilelist',ele.value, getDirListCallback);
             
-            alert() ;
+            alert('函数 getDirList') ;
         }
     </script>
 </head>

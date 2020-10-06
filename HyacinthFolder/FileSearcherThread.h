@@ -20,10 +20,15 @@ class FileSearcherThread : public base::Thread
 {
 public:
 	using SearcherDataList = std::vector<base::Any> ;
-//	using pSearcherDataList = std::unique_ptr<SearcherDataList>;
+	//using SearcherDataList = std::unique_ptr<SearcherDataList>;
 public:
 	explicit FileSearcherThread();
 	virtual ~FileSearcherThread() {}
+
+public:
+	static void DispatchTask(const tracked_objects::Location& from_here,
+		 const fileSearcherWorkId workId,const SearcherDataList& args,
+		 const base::Callback<void(const SearcherDataList&)>& callback);
 
 public:
 	void Init() final;
@@ -31,11 +36,11 @@ public:
 	//DoWork1 不支持绑定lambda 表达式
 	//DoWOrk2 不建议绑定类成员函数，大部分时候应该使用DoWork1,DoWork2基本只使用在lambda上
 
-	void DoWork1(const fileSearcherWorkId workId, SearcherDataList args,
-		 base::Callback<void(SearcherDataList && )>  callback  );
+	void DoWork1(const fileSearcherWorkId workId, const SearcherDataList& args,
+		 const base::Callback<void(const SearcherDataList & )>&  callback  );
 
 	void DoWork2(const fileSearcherWorkId workId, SearcherDataList args,
-		 std::function<void(SearcherDataList &&)>  callback );
+		 std::function<void(const SearcherDataList &)>  callback );
 
 	
 private:

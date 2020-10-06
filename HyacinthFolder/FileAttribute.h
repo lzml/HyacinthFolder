@@ -7,18 +7,23 @@
 */
 #pragma once
 #include "base/strings/string16.h"
+#include "../miniblink/wke.h"
+#include <memory>
 
 
-
-//WIN32_FIND_DATAA wfd; //数据结构;
-
-
-class FileAttribute
+class FileAttribute : public jsData
 {
 public:
+	FileAttribute();
 
 	//js读取区
+	static bool js_setObjectProp(jsExecState es, jsValue object,
+		const char* propertyName, jsValue value);
 
+	static void js_releaseObject(jsData* data);
+
+	static jsValue js_getObjectProp(jsExecState es,
+		jsValue object, const char* propertyName);
 
 	// C++存储区
 	unsigned long  dwFileAttributes;
@@ -32,4 +37,7 @@ public:
 	std::wstring  cFileName;
 	std::wstring  cAlternateFileName;
 };
+
+//using pUniqueFileAttribute = std::unique_ptr<FileAttribute>;
+using pFileAttribute = FileAttribute* ;
 

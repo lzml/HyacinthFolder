@@ -81,6 +81,9 @@
     <ClInclude Include="Any.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="JsFileArrayObject.h">
+      <Filter>jsCpp</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HyacinthFolder.cpp">
@@ -112,6 +115,9 @@
     </ClCompile>
     <ClCompile Include="FileSearcherThread.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="JsFileArrayObject.cpp">
+      <Filter>jsCpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

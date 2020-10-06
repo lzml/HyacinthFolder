@@ -4,7 +4,7 @@
 
 class WebWindow;
 
-class IWebCallback
+class IWebCallback 
 {
 	friend class WebWindow;
 public:

@@ -11,7 +11,7 @@
 #include <base/memory/weak_ptr.h>
 #include "res2/resString.h"
 #include "MsgThreadManager.h"
-
+#include "FileAttribute.h"
 #include "FileSearcher.h"
 #include "FileSearcherThread.h"
 
@@ -101,31 +101,35 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		//启动常驻线程
 		FileSearcherThread t;
 		t.StartAndWaitForTesting();
-		MsgThreadManager::GetInstance()->addOtherThread(ThreadKind::FileSearcherThread, t.AsWeakPtr());
+		base::Thread* pBase = (base::Thread*)(&t);
+		base::WeakPtrFactory<base::Thread> factoryBase(pBase);
+		MsgThreadManager::GetInstance()->addOtherThread(ThreadKind::FileSearcherThread, 
+			factoryBase.GetWeakPtr(),t.AsWeakPtr());
 		
+
 		//**************************     测试异步检索文件夹代码
 
 		//FileSearcherThread 线程调用的lambda回调函数，可以通知其他线程并且传递数据
-		std::function<void(FileSearcherThread::SearcherDataList &&)> sssddd =
-			std::bind([](FileSearcherThread::SearcherDataList && argsList) {
-				//这里可以通知其他线程，把数据传递出去，也可以直接操作
-				std::string ttt = argsList.at(0).AnyCast<std::string>();
-				std::string zzz = argsList.at(1).AnyCast<std::string>();
-				}, 
-				std::placeholders::_1);
-;
-		//传递的目录，以及其他可能需要的参数
-		FileSearcherThread::SearcherDataList list; 
-		list.push_back(123);
-		list.push_back(std::wstring(L"d:"));
-
-		//传递给FileSearcherThread线程的闭包
-		auto  closu = base::Bind(&FileSearcherThread::DoWork2, t.AsWeakPtr(),
-			fileSearcherWorkId::eNumOneFolder, std::move(list), std::move(sssddd));
-
-		//发送消息，传递闭包参数
-		MSGPOSTTASK(ThreadKind::FileSearcherThread, FROM_HERE, std::move(closu));
-		
+//		std::function<void(FileSearcherThread::SearcherDataList &&)> sssddd =
+//			std::bind([](FileSearcherThread::SearcherDataList && argsList) {
+//				//这里可以通知其他线程，把数据传递出去，也可以直接操作
+//				std::string ttt = argsList.at(0).AnyCast<std::string>();
+//				std::string zzz = argsList.at(1).AnyCast<std::string>();
+//				}, 
+//				std::placeholders::_1);
+//;
+//		//传递的目录，以及其他可能需要的参数
+//		FileSearcherThread::SearcherDataList list; 
+//		list.push_back(123);
+//		list.push_back(std::wstring(L"d:"));
+//
+//		//传递给FileSearcherThread线程的闭包
+//		auto  closu = base::Bind(&FileSearcherThread::DoWork2, t.AsWeakPtr(),
+//			fileSearcherWorkId::eNumOneFolder, std::move(list), std::move(sssddd));
+//
+//		//发送消息，传递闭包参数
+//		MSGPOSTTASK(ThreadKind::FileSearcherThread, FROM_HERE, std::move(closu));
+//		
 		//******************************
 
 		do
