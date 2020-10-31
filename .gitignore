@@ -42,3 +42,4 @@
 *.pdb
 /bin/debug.log
 /bin/LocalStorage
+/webres---
