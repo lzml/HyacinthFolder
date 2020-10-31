@@ -84,7 +84,10 @@ jsValue MainWnd::handlerJsMsgloop(WebWindow* webWindow, jsExecState es)
 
 		//异步查找文件夹
 		FileSearcherThread::SearcherDataList list;
-		list.emplace_back(inputContent);
+		if (!inputContent.empty())
+		{
+			list.emplace_back(inputContent);
+		}
 		auto resultCallback = base::Bind(&MainWnd::fileSearcherResultCallback, this->AsWeakPtr(), arg2);
 		//auto pThread = MsgThreadManager::GetInstance()->getThread(ThreadKind::FileSearcherThread);
 		auto workClosure = base::Bind(&FileSearcherThread::DispatchTask, FROM_HERE,
