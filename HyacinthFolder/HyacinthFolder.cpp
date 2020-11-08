@@ -157,14 +157,20 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			}
 
 			MainWnd mainWindow;
-			base::FilePath pathIndexHtml = path_current_dir.AppendASCII("..\\webres\\index.html");
-			if (!WebWindow::createWebWindow(GETRESSTRINGW(ResString::title_main), &mainWindow, pathIndexHtml.AsUTF16Unsafe(),
+			//base::FilePath pathIndexHtml = path_current_dir.AppendASCII("..\\webres\\index.html");
+			//if (!WebWindow::createWebWindow(GETRESSTRINGW(ResString::title_main), &mainWindow, pathIndexHtml.AsUTF16Unsafe(),
+			//	WKE_WINDOW_TYPE_TRANSPARENT, NULL, 0, 0, 1920, 1048))
+			//{
+			//	PostQuitMessage(0);
+			//	break;
+			//}
+			std::wstring pathIndexHtml = L"http://localhost:8080/";
+			if (!WebWindow::createWebWindow(GETRESSTRINGW(ResString::title_main), &mainWindow, pathIndexHtml.c_str(),
 				WKE_WINDOW_TYPE_TRANSPARENT, NULL, 0, 0, 1920, 1048))
 			{
 				PostQuitMessage(0);
 				break;
 			}
-			
 
 			
 
